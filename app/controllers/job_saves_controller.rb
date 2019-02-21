@@ -1,0 +1,2 @@
+class JobSavesController < ApplicationController
+end
