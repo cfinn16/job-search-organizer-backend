@@ -1,2 +1,0 @@
-class JobSave < ApplicationRecord
-end
