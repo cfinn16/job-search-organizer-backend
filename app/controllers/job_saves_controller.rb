@@ -1,2 +1,0 @@
-class JobSavesController < ApplicationController
-end

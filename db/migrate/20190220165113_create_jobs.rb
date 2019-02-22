@@ -7,7 +7,7 @@ class CreateJobs < ActiveRecord::Migration[5.2]
       t.integer :salary
       t.string :contact_email
       t.string :description
-      t.string :column
+      t.boolean :show_more
 
       t.timestamps
     end

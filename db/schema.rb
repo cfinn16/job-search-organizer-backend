@@ -15,14 +15,6 @@ ActiveRecord::Schema.define(version: 2019_02_21_025252) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "job_saves", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "job_id"
-    t.string "column"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "jobs", force: :cascade do |t|
     t.string "title"
     t.string "company"
@@ -30,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_02_21_025252) do
     t.integer "salary"
     t.string "contact_email"
     t.string "description"
-    t.string "column"
+    t.boolean "show_more"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,6 +31,14 @@ ActiveRecord::Schema.define(version: 2019_02_21_025252) do
     t.string "description"
     t.string "job_id"
     t.string "integer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_jobs", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "job_id"
+    t.string "column"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
