@@ -22,15 +22,13 @@ ActiveRecord::Schema.define(version: 2019_02_21_025252) do
     t.integer "salary"
     t.string "contact_email"
     t.string "description"
-    t.boolean "show_more"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "tasks", force: :cascade do |t|
     t.string "description"
-    t.string "job_id"
-    t.string "integer"
+    t.integer "job_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
