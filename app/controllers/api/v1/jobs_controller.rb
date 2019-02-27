@@ -9,6 +9,12 @@ class Api::V1::JobsController < ApplicationController
     render json: @job, status: :created
   end
 
+  def update
+    @job = Job.find(params[:id])
+    @job.updated(job_params)
+    render json: @event, status: :accepted
+  end
+
   def destroy
     @job = Job.find(params[:id])
     @job.delete
