@@ -11,8 +11,10 @@ class Api::V1::UsersController < ApplicationController
 
   def login
     @user = User.find_by(name: params[:name], email: params[:email], password: params[:password])
-    if @user
+    if @user != nil
       render json: @user.id, status: :ok
+    else
+      render json: {errors: "User not found!"}
     end
   end
 
