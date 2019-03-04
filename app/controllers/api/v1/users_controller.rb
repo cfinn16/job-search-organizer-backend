@@ -10,7 +10,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    byebug
     @user = User.new(
       name: params[:name],
       email: params[:email],
@@ -27,7 +26,6 @@ class Api::V1::UsersController < ApplicationController
     @user = User.find_by(name: params[:name], email: params[:email])
 
     if @user && @user.authenticate(params[:password])
-      byebug
       render json: @user.id, status: :ok
     else
       render json: {errors: "User not found!"}
