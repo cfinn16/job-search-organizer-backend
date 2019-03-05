@@ -16,7 +16,8 @@ class Api::V1::UsersController < ApplicationController
       password: params[:password]
     )
     if @user.save
-      render json: @user, status: :created
+      token = JWT.encode({user_id: @user.id}, "plzH1reM3")
+      render json: {user: @user, token: token}
     else
       render json: {errors: @user.errors.full_messages}
     end
@@ -26,9 +27,22 @@ class Api::V1::UsersController < ApplicationController
     @user = User.find_by(name: params[:name], email: params[:email])
 
     if @user && @user.authenticate(params[:password])
-      render json: @user.id, status: :ok
+      token = JWT.encode({user_id: @user.id}, "plzH1reM3")
+      render json: {user: @user, token: token}
     else
       render json: {errors: "User not found!"}
+    end
+  end
+
+  def get_user_from_token
+    token = request.headers["Authorization"]
+    user_id = JWT.decode(token, "plzH1reM3")[0]["user_id"]
+
+    @user = User.find_by(id: user_id)
+    if @user
+      render json: @user
+    else
+      render json: {errors: "Decode failed!"}
     end
   end
 

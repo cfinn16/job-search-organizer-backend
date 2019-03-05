@@ -14,7 +14,7 @@ class Api::V1::JobsController < ApplicationController
     if @job
       @user_job = UserJob.find_by(job_id: @job.id, user_id: params[:user_id])
       if @user_job
-        render json: {message: "Already on your board"}
+        render json: {errors: "That job is already on your board"}
       else
         @new_user_job = UserJob.create(job_id: @job.id, user_id: params[:user_id], column: "Interested")
         render json: @new_user_job, status: :created
