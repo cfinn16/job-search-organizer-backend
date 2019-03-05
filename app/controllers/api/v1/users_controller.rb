@@ -10,21 +10,44 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
-    render json: @user, status: :created
+    @user = User.new(
+      name: params[:name],
+      email: params[:email],
+      password: params[:password]
+    )
+    if @user.save
+      token = JWT.encode({user_id: @user.id}, "plzH1reM3")
+      render json: {user: @user, token: token}
+    else
+      render json: {errors: @user.errors.full_messages}
+    end
   end
 
   def login
-    @user = User.find_by(name: params[:name], email: params[:email], password: params[:password])
-    if @user != nil
-      render json: @user.id, status: :ok
+    @user = User.find_by(name: params[:name], email: params[:email])
+
+    if @user && @user.authenticate(params[:password])
+      token = JWT.encode({user_id: @user.id}, "plzH1reM3")
+      render json: {user: @user, token: token}
     else
       render json: {errors: "User not found!"}
     end
   end
 
-  def user_params
-    params.require(:user).permit(:name, :email, :password)
+  def get_user_from_token
+    token = request.headers["Authorization"]
+    user_id = JWT.decode(token, "plzH1reM3")[0]["user_id"]
+
+    @user = User.find_by(id: user_id)
+    if @user
+      render json: @user
+    else
+      render json: {errors: "Decode failed!"}
+    end
   end
+
+  # def user_params
+  #   params.require(:user).permit(:name, :email, :password)
+  # end
 
 end
