@@ -5,7 +5,7 @@ class Api::V1::JobsController < ApplicationController
   end
 
   def create
-    @job = Job.create(params)
+    @job = Job.create(job_params)
     render json: @job, status: :created
   end
 
@@ -20,15 +20,15 @@ class Api::V1::JobsController < ApplicationController
         render json: @new_user_job, status: :created
       end
     else
-      @new_job = Job.create(title: params[:title], company: params[:company], description: params[:description])
+      @new_job = Job.create(title: params[:title], company: params[:company], location: params[:location], experience_level: params[:experience_level], description: params[:description])
       render json: @new_job, status: :created
     end
   end
 
   def update
     @job = Job.find(params[:id])
-    @job.updated(job_params)
-    render json: @event, status: :accepted
+    @job.update(job_params)
+    render json: @job, status: :accepted
   end
 
   def destroy
@@ -36,8 +36,8 @@ class Api::V1::JobsController < ApplicationController
     @job.delete
   end
 
-  # def job_params
-  #   params.require(:job).permit(:title, :company, :years_experience, :salary, :contact_email, :description)
-  # end
+  def job_params
+    params.require(:job).permit(:title, :company, :location, :experience_level, :salary, :description)
+  end
 
 end

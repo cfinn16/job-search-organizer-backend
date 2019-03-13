@@ -3,9 +3,9 @@ class CreateJobs < ActiveRecord::Migration[5.2]
     create_table :jobs do |t|
       t.string :title
       t.string :company
-      t.integer :years_experience
+      t.string :location
+      t.string :experience_level
       t.integer :salary
-      t.string :contact_email
       t.string :description
 
       t.timestamps

@@ -6,13 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Job.create(title:"Full-Stack Software Engineer", company:"Reddit", years_experience: 2, salary: 100000, contact_email: "realhuman@reddit.com", description:"Build the future of Reddit with us")
+Job.create(title:"Full-Stack Software Engineer", company:"Reddit", location: "New York City, NY", experience_level: "Entry Level", salary: 100000, description:"Build the future of Reddit with us")
 
-Job.create(title:"Front-End Software Engineer", company:"Trello", years_experience: 1, salary: 900000, contact_email: "taco@trello.com", description:"We love organized code")
+Job.create(title:"Front-End Software Engineer", company:"Trello", location: "New York City, NY", experience_level: "Entry Level", salary: 900000, description:"We love organized code")
 
-Job.create(title:"Junior Web Developer", company:"GlassDoor", years_experience: 0, salary: 800000, contact_email: "person@glassdoor.com", description:"New grads welcome to apply")
+Job.create(title:"Junior Web Developer", company:"GlassDoor", location: "New York City, NY", experience_level: "Entry Level", salary: 800000, description:"New grads welcome to apply")
 
-User.create(name: "Connor Finnegan", email: "fakeconnoremail@gmail.com", password: "password")
+User.create(name: "Connor Finnegan", email: "connor@gmail.com", password: "password")
 
 UserJob.create(user_id: 1, job_id: 1, column: "Interested")
 UserJob.create(user_id: 1, job_id: 2, column: "Interested")
