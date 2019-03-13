@@ -20,7 +20,6 @@ class Api::V1::JobsController < ApplicationController
         render json: @new_user_job, status: :created
       end
     else
-      byebug
       @new_job = Job.create(title: params[:title], company: params[:company], location: params[:location], experience_level: params[:experience_level], description: params[:description])
       render json: @new_job, status: :created
     end
