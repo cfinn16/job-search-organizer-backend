@@ -5,7 +5,8 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def create
-    @task = Task.create(task_params)
+    @user_job_id = UserJob.find_by(user_id: params[:user_id], job_id: params[:job_id]).id
+    @task = Task.create(description: params[:description], user_job_id: @user_job_id, is_completed: false)
     render json: @task, status: :created
   end
 
