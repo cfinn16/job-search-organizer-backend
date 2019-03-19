@@ -1,5 +1,5 @@
 class JobSerializer < ActiveModel::Serializer
-  attributes :id, :title, :company, :location, :experience_level, :salary, :description, :current_column
+  attributes :id, :title, :company, :location, :experience_level, :salary, :description, :current_column, :tasks
 
   def current_column
     if self.object.user_jobs.length > 0
@@ -10,5 +10,5 @@ class JobSerializer < ActiveModel::Serializer
     end
   end
 
-  has_many :tasks
+
 end
