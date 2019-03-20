@@ -5,8 +5,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    render json: @user, include: ['jobs.tasks'], status: :ok
+    @user = curr_user
+    render json: @user, include: ['jobs', 'tasks'], status: :ok
   end
 
   def create
@@ -35,19 +35,11 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def get_user_from_token
-    token = request.headers["Authorization"]
-    user_id = JWT.decode(token, "plzH1reM3")[0]["user_id"]
-
-    @user = User.find_by(id: user_id)
-    if @user
-      render json: @user
-    else
-      render json: {errors: "Decode failed!"}
-    end
+    if curr_user
+				render json: curr_user
+			else
+				render json: {errors: "WHOA! User not found!"}
+			end
   end
-
-  # def user_params
-  #   params.require(:user).permit(:name, :email, :password)
-  # end
 
 end

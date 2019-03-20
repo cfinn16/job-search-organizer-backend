@@ -28,7 +28,8 @@ ActiveRecord::Schema.define(version: 2019_02_21_165142) do
 
   create_table "tasks", force: :cascade do |t|
     t.string "description"
-    t.integer "user_job_id"
+    t.integer "user_id"
+    t.integer "job_id"
     t.boolean "is_completed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
