@@ -10,5 +10,4 @@ class JobSerializer < ActiveModel::Serializer
     end
   end
 
-  has_many :tasks
 end
