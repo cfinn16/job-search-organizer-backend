@@ -19,7 +19,9 @@ class Api::V1::UserJobsController < ApplicationController
     @user_job = UserJob.where(user_id: params[:user_id], job_id: params[:job_id])
     @tasks = Task.where(user_id: params[:user_id], job_id: params[:job_id])
     @user_job.destroy
-    @tasks.destroy
+    if @tasks
+      @tasks.destroy
+    end
   end
 
   def user_job_params
