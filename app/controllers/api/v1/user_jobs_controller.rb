@@ -17,11 +17,11 @@ class Api::V1::UserJobsController < ApplicationController
 
   def destroy
     @user_job = UserJob.where(user_id: params[:user_id], job_id: params[:job_id])
-    @tasks = Task.where(user_id: params[:user_id], job_id: params[:job_id])
+    # @tasks = Task.where(user_id: params[:user_id], job_id: params[:job_id])
     @user_job.delete
-    if @tasks
-      @tasks.delete
-    end
+    # if @tasks
+    #   @tasks.delete
+    # end
   end
 
   def user_job_params
