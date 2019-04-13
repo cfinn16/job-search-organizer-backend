@@ -15,6 +15,15 @@ class Api::V1::UserJobsController < ApplicationController
     render json: @user_job, status: :accepted
   end
 
+  def destroy
+    @user_job = UserJob.find_by(user_id: params[:user_id], job_id: params[:job_id])
+    @tasks = Task.where(user_id: params[:user_id], job_id: params[:job_id])
+    @user_job.delete
+    if @tasks
+      @tasks.delete_all
+    end
+  end
+
   def user_job_params
     params.require(:user_job).permit(:user_id, :job_id, :column)
   end
